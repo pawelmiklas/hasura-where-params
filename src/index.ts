@@ -1,13 +1,9 @@
 import merge from "deepmerge";
 import _isEmpty from "lodash.isempty";
+import { truthy } from "./utils/truthy";
 
-const whereClause = <T extends object>(
-  ...filters: (Object | undefined)[]
-): T => {
-  const onlyObjects = filters.filter((item) => item !== undefined) as Object[];
-
-  return merge.all(onlyObjects) as T;
-};
+const whereClause = <T extends object>(...filters: (Object | undefined)[]): T =>
+  merge.all(filters.filter(truthy)) as T;
 
 const whereFilter = (
   path: string,

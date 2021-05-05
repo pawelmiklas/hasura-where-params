@@ -2,6 +2,8 @@ import merge from "deepmerge";
 import { truthy } from "./utils/truthy";
 import empty from "is-empty";
 
+const ARRAY_FIELDS = ["_and", "_or"];
+
 const whereClause = <T extends object>(...filters: (Object | undefined)[]): T =>
   merge.all(filters.filter(truthy)) as T;
 
@@ -16,7 +18,11 @@ const whereFilter = (
 
   if ((condition == null && !empty(value)) || condition === true) {
     return path.split(".").reduceRight((acc, item) => {
-      acc = { [item]: acc };
+      if (ARRAY_FIELDS.includes(item)) {
+        acc = { [item]: [{ ...acc }] };
+      } else {
+        acc = { [item]: acc };
+      }
 
       return acc;
     }, value);

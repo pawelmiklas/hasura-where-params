@@ -1,6 +1,6 @@
 import merge from "deepmerge";
-import _isEmpty from "lodash.isempty";
 import { truthy } from "./utils/truthy";
+import empty from "is-empty";
 
 const whereClause = <T extends object>(...filters: (Object | undefined)[]): T =>
   merge.all(filters.filter(truthy)) as T;
@@ -10,11 +10,11 @@ const whereFilter = (
   value: any,
   condition?: boolean
 ): Object | undefined => {
-  if (condition == null && _isEmpty(value)) {
+  if (condition == null && empty(value)) {
     return;
   }
 
-  if ((condition == null && !_isEmpty(value)) || condition === true) {
+  if ((condition == null && !empty(value)) || condition === true) {
     return path.split(".").reduceRight((acc, item) => {
       acc = { [item]: acc };
 

@@ -4,7 +4,7 @@ import empty from "is-empty";
 
 const ARRAY_FIELDS = ["_and", "_or"];
 
-const whereClause = <T extends object>(...filters: (Object | undefined)[]): T =>
+const whereArgs = <T extends object>(...filters: (Object | undefined)[]): T =>
   merge.all(filters.filter(truthy)) as T;
 
 const whereFilter = (
@@ -31,4 +31,4 @@ const whereFilter = (
   return;
 };
 
-export { whereClause, whereFilter };
+export { whereArgs, whereFilter };

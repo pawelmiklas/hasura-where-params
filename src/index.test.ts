@@ -1,10 +1,10 @@
-import { whereClause, whereFilter } from ".";
+import { whereArgs, whereFilter } from ".";
 
-describe("whereClause with whereFilter", () => {
+describe("whereArgs with whereFilter", () => {
   it("should return correct structure", () => {
     const totalGross = 2000;
 
-    const input = whereClause(
+    const input = whereArgs(
       whereFilter("fiscalNumber._eq", "order"),
       whereFilter("_or.dailyReportNumber._in", ["user1", "user2", "user3"]),
       whereFilter("_or.printoutNumber._ilike", "query"),
@@ -45,7 +45,7 @@ describe("whereClause with whereFilter", () => {
   it("_or", () => {
     const name = "FooBar";
 
-    const input = whereClause(
+    const input = whereArgs(
       whereFilter("_or.name._ilike", name),
       whereFilter("_or.taxNumber._ilike", name),
       whereFilter("deletedAt._eq", 0, true),
@@ -73,7 +73,7 @@ describe("whereClause with whereFilter", () => {
   });
 
   it("empty value", () => {
-    const input = whereClause(
+    const input = whereArgs(
       whereFilter("name._ilike", ""),
       whereFilter("surname._ilike", null),
       whereFilter("lastName._ilike", undefined)
@@ -85,7 +85,7 @@ describe("whereClause with whereFilter", () => {
   });
 
   it("_and", () => {
-    const input = whereClause(
+    const input = whereArgs(
       whereFilter("_and.documentStatus._eq", "status"),
       whereFilter("_and.documentStatus._neq", "created")
     );

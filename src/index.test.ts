@@ -42,7 +42,7 @@ describe("whereClause with whereFilter", () => {
     expect(input).toEqual(outputResult);
   });
 
-  it("_or test", () => {
+  it("_or", () => {
     const name = "FooBar";
 
     const input = whereClause(
@@ -80,6 +80,22 @@ describe("whereClause with whereFilter", () => {
     );
 
     const outputResult = {};
+
+    expect(input).toEqual(outputResult);
+  });
+
+  it("_and", () => {
+    const input = whereClause(
+      whereFilter("_and.documentStatus._eq", "status"),
+      whereFilter("_and.documentStatus._neq", "created")
+    );
+
+    const outputResult = {
+      _and: [
+        { documentStatus: { _eq: "status" } },
+        { documentStatus: { _neq: "created" } },
+      ],
+    };
 
     expect(input).toEqual(outputResult);
   });

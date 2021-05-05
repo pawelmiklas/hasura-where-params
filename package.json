@@ -23,5 +23,9 @@
   "license": "MIT",
   "dependencies": {
     "lodash.isempty": "^4.4.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/snaqu/hasura-where-params.git"
   }
 }

@@ -1,3 +1,5 @@
+[![npm version](https://img.shields.io/npm/v/hasura-where-params.svg?style=flat)](https://www.npmjs.com/package/hasura-where-params)
+
 hasura where params - create where clause easy
 
 ```javascript

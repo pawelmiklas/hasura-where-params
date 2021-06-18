@@ -1,11 +1,12 @@
-import merge from "deepmerge";
+import type * as DeepMergeType from "deepmerge";
+const deepMerge: typeof DeepMergeType = require("deepmerge");
 import { truthy } from "./utils/truthy";
 import empty from "is-empty";
 
 const ARRAY_FIELDS = ["_and", "_or"];
 
 const whereArgs = <T extends object>(...filters: (Object | undefined)[]): T =>
-  merge.all(filters.filter(truthy)) as T;
+  deepMerge.all(filters.filter(truthy)) as T;
 
 const whereFilter = (
   path: string,
